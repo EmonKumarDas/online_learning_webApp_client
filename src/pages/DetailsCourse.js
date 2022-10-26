@@ -1,23 +1,34 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import CourseContent from '../smallPages/CourseContent';
 
 const DetailsCourse = () => {
     const detailsCourseData = useLoaderData();
-    console.log(detailsCourseData[0].name)
-  
+    const CourseContents = detailsCourseData[0].contents;
+    
+
+
     return (
-        <div className="card card-side bg-base-100 shadow-xl mt-[100px] h-[60vh] w-[60vw]">
-        <img className='h-[60vh] w-[30vw]' src={detailsCourseData[0].image} alt="Movie"/>
-        <div className="card-body">
-          <h2 className="card-title">{detailsCourseData[0].name}</h2>
-          <p>{detailsCourseData[0].description}</p>
-          <p>${detailsCourseData[0].amount}</p>
-          {/* <p>{detailsCourseData[0].description}</p> */}
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">CheckOut</button>
-          </div>
+        <div className="card w-full bg-base-100 mt-[100px]">
+            <img src={detailsCourseData[0].image} alt="" />
+            <div className="card-body">
+                <h2 className="card-title">
+                    {detailsCourseData[0].name}!
+                    <div className="badge badge-secondary">NEW</div>
+                </h2>
+                <p>{detailsCourseData[0].description}</p>
+                <p className='font-bold'>Course Fee: ${detailsCourseData[0].amount}</p>
+                <h1 className='font-bold text-center text-3xl my-4'>What you Will learn from out Course?</h1>
+                {
+                    CourseContents.map(Content =><CourseContent
+                        content={Content}
+                        ></CourseContent>)
+                }
+                <div className="card-actions justify-center ">
+                   <Link to={`/checkout/${detailsCourseData[0].id}`}> <button className="btn btn-outline btn-accent w-[40vw]">CheckOut</button></Link>
+                </div>
+            </div>
         </div>
-      </div>
     );
 };
 
