@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
-import { Link, useLoaderData } from 'react-router-dom';
+import {useLoaderData } from 'react-router-dom';
 import ShareVideoLink from '../smallPages/ShareVideoLink';
 
 const CheckOutPage = () => {
@@ -9,12 +9,18 @@ const CheckOutPage = () => {
     const EnrollData = enrollInfo[0];
     const video = EnrollData.content;
     let curentVideo = (video)=>{
+        setIsPlay(true)
         setVideos(video)
+        
     }
     let [videos,setVideos] = useState(video[0].video_);
+    let [isPlay,setIsPlay] = useState(false);
     return (
-        <div className="card w-full bg-base-100">
+        <div className="card w-full bg-base-100 mt-[100px]">
+            <div className='w-[50vw] m-auto'>
             <ReactPlayer url={videos}></ReactPlayer>
+            </div>
+           
             <div className="card-body">
                 {
                     video.map(video=><div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
@@ -24,6 +30,7 @@ const CheckOutPage = () => {
                     <ShareVideoLink 
                     video={video} 
                     currentVideo = {curentVideo}
+                    isPlay={isPlay}
                     ></ShareVideoLink>
                 </div>)
                 }

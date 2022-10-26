@@ -25,7 +25,7 @@ const DetailsCourse = () => {
                         ></CourseContent>)
                 }
                 <div className="card-actions justify-center ">
-                   <Link to={`/checkout/${detailsCourseData[0].id}`}> <button className="btn btn-outline btn-accent w-[40vw]">CheckOut</button></Link>
+                   <Link to={`/checkout/${detailsCourseData[0].id}`}> <button className="btn btn-outline btn-accent w-[40vw]">Get premium access</button></Link>
                 </div>
             </div>
         </div>
