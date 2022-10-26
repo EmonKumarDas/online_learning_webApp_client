@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Cart from '../smallPages/Cart';
 
 const HomePage = () => {
+    const [CourseData,setCourseData] = useState([]);
+    useEffect(()=>{
+        fetch("http://localhost:5000/Course").then(res=>res.json()).then(result=>setCourseData(result))
+    },[])
     return (
-        <div>
-            
+        <>
+
+            <p className='mb-5 text-5xl font-bold'>Start Your Learning</p>
+            {
+            <div className='my-5 grid grid-cols-2'>
+            {
+                CourseData.map(CourseList=><Cart
+                key={CourseList.id}
+                CourseList={CourseList}
+                ></Cart>
+               
+              )
+            }
         </div>
+            }
+        </>
     );
 };
 
