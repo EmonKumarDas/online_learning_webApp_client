@@ -11,10 +11,10 @@ const MainPage = () => {
            <NavBar></NavBar>
            <Slider></Slider>
            <div className='grid grid-cols-6 w-[98vw] m-auto'>
-            <div className='col-span-2 p-5 mt-5'>
+            <div className='lg:col-span-2 md:col-span-6 col-span-6 p-5 mt-5'>
                <LeftSide></LeftSide>
             </div>
-            <div className='col-span-4 p-5'>
+            <div className='lg:col-span-4 md:col-span-6 col-span-6 p-5'>
                 <Outlet></Outlet>
             </div>
             </div> 

@@ -11,7 +11,7 @@ const HomePage = () => {
 
             <p className='mb-5 text-5xl font-bold'>Start Your Learning</p>
             {
-            <div className='my-5 grid grid-cols-2'>
+            <div className='my-5 grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1'>
             {
                 CourseData.map(CourseList=><Cart
                 key={CourseList.id}

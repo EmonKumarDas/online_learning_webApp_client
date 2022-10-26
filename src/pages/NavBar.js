@@ -32,8 +32,10 @@ const NavBar = () => {
 
           </ul>
         </div>
-        <FaBookReader className='h-[40px] w-[40px]'></FaBookReader>
+       <div className='lg:flex'>
+       <FaBookReader className='h-[40px] w-[40px] mx-16 lg:mx-0'></FaBookReader>
         <Link to="/home" className="btn btn-ghost normal-case text-xl">LEARN-ONLINE</Link>
+       </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
@@ -61,8 +63,8 @@ const NavBar = () => {
             </button>
 
             :
-            <div>
-              <Link to='' className="btn mr-3">Login</Link>
+            <div className='lg:flex md:flex lg:mx-0 md:mx-0 ml-[40px]'>
+              <Link to='' className="btn mr-3 lg:mb-0 md:mb-0 mb-1">Login</Link>
               <Link to='/registration' className="btn">Registration</Link>
             </div>
         }
