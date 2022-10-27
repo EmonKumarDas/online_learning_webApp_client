@@ -7,7 +7,7 @@ const LeftSide = () => {
     
     const [CourseData,setCourseData] = useState([]);
     useEffect(()=>{
-        fetch("http://localhost:5000/Course").then(res=>res.json()).then(result=>setCourseData(result))
+        fetch("https://online-courses-server-emonkumardas.vercel.app/Course").then(res=>res.json()).then(result=>setCourseData(result))
     },[])
     return (
         <div className='mt-[75px]'>
