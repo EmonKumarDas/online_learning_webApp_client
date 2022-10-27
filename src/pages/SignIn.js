@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { userContext } from '../context/AuthProvider';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,18 +7,19 @@ const SignIn = () => {
 	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn } = useContext(userContext);
 	const navigate = useNavigate();
 	const [error, setError] = useState()
-
+	const location = useLocation();
+	const from = location.state?.from?.pathname || '/';
 	const singInWithGoogle = () => {
 		GoogleSignIn().then((result) => {
 			toast("Successfully signed in")
-			navigate('/home')
+			navigate(from, { replace: true });
 		})
 	}
 
 	const handleGithubSignIn = () => {
 		toast("Successfully signed in")
 		GithubSignIn().then((result) => {
-			navigate('/home')
+			navigate(from, { replace: true });
 		})
 	}
 
@@ -31,7 +32,7 @@ const SignIn = () => {
 		const password = e.target.password.value;
 		EmailPaswordSignIn(email, password).then((userCredential) => {
 			toast("Successfully signed in")
-			navigate('/home')
+			navigate(from, { replace: true });
 
 		}).catch((error) => {
 			const errorMessage = error.message;
