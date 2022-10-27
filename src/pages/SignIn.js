@@ -11,15 +11,16 @@ const SignIn = () => {
 	const from = location.state?.from?.pathname || '/';
 	const singInWithGoogle = () => {
 		GoogleSignIn().then((result) => {
-			toast("Successfully signed in")
 			navigate(from, { replace: true });
+			toast("Successfully signed in")
 		})
 	}
 
 	const handleGithubSignIn = () => {
-		toast("Successfully signed in")
+		
 		GithubSignIn().then((result) => {
 			navigate(from, { replace: true });
+			toast("Successfully signed in")
 		})
 	}
 
