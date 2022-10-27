@@ -95,25 +95,25 @@ const SignIn = () => {
 									<label className="label">
 										<span className="label-text">Name</span>
 									</label>
-									<input name="name" type="text" placeholder="name" className="input input-bordered" />
+									<input name="name" type="text" placeholder="name" className="input input-bordered" required/>
 								</div>
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">PhotoURL</span>
 									</label>
-									<input name="PhotoURL" type="text" placeholder="PhotoURL" className="input input-bordered" />
+									<input name="PhotoURL" type="text" placeholder="PhotoURL" className="input input-bordered" required/>
 								</div>
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">Email</span>
 									</label>
-									<input name="email" type="text" placeholder="email" className="input input-bordered" />
+									<input name="email" type="text" placeholder="email" className="input input-bordered" required/>
 								</div>
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">Password</span>
 									</label>
-									<input type="text" name="password" placeholder="password" className="input input-bordered" />
+									<input type="text" name="password" placeholder="password" className="input input-bordered" required/>
 									<label className="label">
 										<Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
 									</label>
