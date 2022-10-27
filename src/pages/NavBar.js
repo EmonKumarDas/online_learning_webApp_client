@@ -24,7 +24,7 @@ const NavBar = () => {
             <li><Link to="/home">Courses</Link></li>
 
             <li><Link to="">FAQ</Link></li>
-            <li><Link to="">Blog</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
             {
               user?.displayName ? <button onClick={Logout} className="btn mr-3">LogOut</button> : ""
             }
@@ -42,7 +42,7 @@ const NavBar = () => {
           <li><Link to="/home">Courses</Link></li>
 
           <li><Link to="">FAQ</Link></li>
-          <li><Link to="">Blog</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
           {
             user ? <button onClick={Logout} className="btn mr-3">LogOut</button> : ""
           }
