@@ -1,30 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { userContext } from '../context/AuthProvider';
-
+import 'react-toastify/dist/ReactToastify.css';
 const SignIn = () => {
-	const { GoogleSignIn, GithubSignIn } = useContext(userContext);
+	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn } = useContext(userContext);
 	const navigate = useNavigate();
+	const [error, setError] = useState()
 
 	const singInWithGoogle = () => {
 		GoogleSignIn().then((result) => {
+			toast("Successfully signed in")
 			navigate('/home')
 		})
 	}
 
 	const handleGithubSignIn = () => {
+		toast("Successfully signed in")
 		GithubSignIn().then((result) => {
 			navigate('/home')
 		})
 	}
 
-	const HandleForm = (e)=>{
+
+	const HandleForm = (e) => {
 		e.preventDefault()
 		const name = e.target.name.value;
 		const PhotoURL = e.target.PhotoURL.value;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
-		console.log(email,name,PhotoURL,password)
+		EmailPaswordSignIn(email, password).then((userCredential) => {
+			toast("Successfully signed in")
+			navigate('/home')
+
+		}).catch((error) => {
+			const errorMessage = error.message;
+			toast(errorMessage)
+			setError(errorMessage);
+		});
 	}
 
 	return (

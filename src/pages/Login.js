@@ -1,55 +1,68 @@
 import React, { useContext, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
-import { userContext } from '../Context/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { userContext } from '../context/AuthProvider';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
-  const { LogInWithForm } = useContext(userContext);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const handleForm = (event) => {
-    event.preventDefault()
-    const formevent = event.target;
-    const email = formevent.email.value;
-    const password = formevent.password.value;
-    LogInWithForm(email, password).then((userCredential) => {
-      const user = userCredential.user;
-      navigate('/home');
-      console.log(user)
-      setError("")
-    }).catch((error) => {
-      const errorMessage = error.message;
-      let getError = errorMessage.slice(1, 8)
-      setError(getError)
-    });
-  }
+  const {EmailPaswordLogIn} = useContext(userContext);
+	const navigate = useNavigate();
+	const [error, setError] = useState();
+
+  const HandleForm = (e) => {
+		e.preventDefault()
+		const email = e.target.email.value;
+		const password = e.target.password.value;
+		EmailPaswordLogIn(email, password).then((userCredential) => {
+			toast("Successfully LoginIn")
+			navigate('/home')
+
+		}).catch((error) => {
+			const errorMessage = error.message;
+			toast(errorMessage)
+			setError(errorMessage);
+		});
+	}
 
   return (
-    <div className="w-full h-[400px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
-      <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-      <Form onSubmit={handleForm}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control name="email" type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+<div className="lg:mx-0 md:mx-[180px] w-[100vw] h-[500px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+			<h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
+			<div className="flex items-center w-full my-4">
+				<hr className="w-full dark:text-gray-400" />
+				<p className="px-3 dark:text-gray-400">OR</p>
+				<hr className="w-full dark:text-gray-400" />
+			</div>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control name="password" type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <p className='text-red-700'>{error}</p>
-        <Button variant="primary" type="submit" className="mx-[40%]">
-          Submit
-        </Button>
-      </Form>
+			<div className="hero">
+				<div className="hero-content w-full lg:flex-row-reverse">
+					<div className="card flex-shrink-0 w-full">
+						<div className="card-body">
+							<form onSubmit={HandleForm}>
+								<div className="form-control">
+									<label className="label">
+										<span className="label-text">Email</span>
+									</label>
+									<input name="email" type="text" placeholder="email" className="input input-bordered" />
+								</div>
+								<div className="form-control">
+									<label className="label">
+										<span className="label-text">Password</span>
+									</label>
+									<input type="text" name="password" placeholder="password" className="input input-bordered" />
+									<label className="label">
+										<Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
+									</label>
+								</div>
+								<div className="form-control mt-6">
+									<button className="btn btn-primary">Login</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    </div>
+		</div>
   );
 };
 

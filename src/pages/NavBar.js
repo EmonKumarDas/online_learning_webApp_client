@@ -44,7 +44,7 @@ const NavBar = () => {
           <li><Link to="">FAQ</Link></li>
           <li><Link to="">Blog</Link></li>
           {
-            user?.displayName ? <button onClick={Logout} className="btn mr-3">LogOut</button> : ""
+            user ? <button onClick={Logout} className="btn mr-3">LogOut</button> : ""
           }
         </ul>
       </div>
@@ -53,7 +53,7 @@ const NavBar = () => {
       <div className="navbar-end">
         {
 
-          user?.displayName ?
+          user ?
             <button title={user?.displayName}>
               <div className="avatar p-3">
                 <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -64,7 +64,7 @@ const NavBar = () => {
 
             :
             <div className='lg:flex md:flex lg:mx-0 md:mx-0 ml-[40px]'>
-              <Link to='' className="btn mr-3 lg:mb-0 md:mb-0 mb-1">Login</Link>
+              <Link to='/login' className="btn mr-3 lg:mb-0 md:mb-0 mb-1">Login</Link>
               <Link to='/registration' className="btn">Registration</Link>
             </div>
         }

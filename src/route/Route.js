@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import CheckOutPage from "../pages/CheckOutPage";
 import DetailsCourse from "../pages/DetailsCourse";
 import HomePage from "../pages/HomePage";
+import Login from "../pages/Login";
 import SignIn from "../pages/SignIn";
 import MainPage from "./MainPage";
 import PrivateRoute from "./PrivateRoute";
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/registration",
         element:<SignIn></SignIn>
+      },
+      {
+        path: "/login",
+        element:<Login></Login>
       },
      
 
