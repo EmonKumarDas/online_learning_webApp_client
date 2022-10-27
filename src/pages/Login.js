@@ -53,6 +53,9 @@ const Login = () => {
                   <label className="label">
                     <Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
                   </label>
+                  <label className="label">
+                    <Link to="/registration" className="label-text-alt link link-hover">Don't Have an account?</Link>
+                  </label>
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">Login</button>

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { createContext, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ const AuthProvider = ({children}) => {
     const GithubProvider = new GithubAuthProvider();
     const auth = getAuth(app);
     let [user,setUser] = useState("")
+    let [loading,setLoading] = useState(true);
 
     // Google sign in
     const GoogleSignIn =()=>signInWithPopup(auth, GoogleProvider);
@@ -24,15 +25,19 @@ const AuthProvider = ({children}) => {
     // LogIn with email and password
     const EmailPaswordLogIn = (email,password)=>signInWithEmailAndPassword(auth, email, password);
 
+    // update user profile
+    const updateUserProfile =(profile)=>updateProfile(auth.currentUser,profile);
+
     // LogOut
     const LogOut =()=>signOut(auth);
 
-    const authInfo={GoogleSignIn,user,LogOut,GithubSignIn,EmailPaswordSignIn,EmailPaswordLogIn};
+    const authInfo={GoogleSignIn,user,loading,LogOut,GithubSignIn,EmailPaswordSignIn,EmailPaswordLogIn,updateUserProfile};
 
     // get current user
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)
+            setLoading(false)
         }) 
         return unsubscribe;
     },[])

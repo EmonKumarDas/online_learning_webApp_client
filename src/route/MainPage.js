@@ -7,7 +7,7 @@ import Slider from '../pages/Slider';
 
 const MainPage = () => {
     return (
-        <div>
+        <div className='w-[98vw] m-auto'>
            <NavBar></NavBar>
            <Slider></Slider>
            <div className='grid grid-cols-6 w-[98vw] m-auto'>

@@ -17,7 +17,7 @@ const CheckOutPage = () => {
     let [isPlay,setIsPlay] = useState(false);
     return (
         <div className="card w-full bg-base-100 mt-[100px]">
-            <div className='w-[50vw] m-auto'>
+            <div className='lg:ml-[100px] md:ml-[150px] w-10'>
             <ReactPlayer url={videos}></ReactPlayer>
             </div>
            

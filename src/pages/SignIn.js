@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { userContext } from '../context/AuthProvider';
 import 'react-toastify/dist/ReactToastify.css';
 const SignIn = () => {
-	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn } = useContext(userContext);
+	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn ,updateUserProfile} = useContext(userContext);
 	const navigate = useNavigate();
 	const [error, setError] = useState()
 	const location = useLocation();
@@ -30,8 +30,15 @@ const SignIn = () => {
 		const PhotoURL = e.target.PhotoURL.value;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
+
 		EmailPaswordSignIn(email, password).then((userCredential) => {
+			
 			toast("Successfully signed in")
+			e.target.email.value = "";
+			e.target.password.value= "";
+			e.target.name.value= "";
+			e.target.PhotoURL.value= "";
+			HandleUserProfile(name,PhotoURL);
 			navigate(from, { replace: true });
 
 		}).catch((error) => {
@@ -39,7 +46,22 @@ const SignIn = () => {
 			toast(errorMessage)
 			setError(errorMessage);
 		});
+
+		const HandleUserProfile=(name,PhotoURL)=>{
+			const profile = {
+				displayName : name,
+				photoURL : PhotoURL
+			}
+			console.log(profile)
+			updateUserProfile(profile).then(()=>{
+
+			}).catch((error) => {
+			console.log(error)
+			  });
+		}
 	}
+
+
 
 	return (
 		<div className="lg:mx-0 md:mx-[180px] w-[100vw] h-[800px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
@@ -95,9 +117,12 @@ const SignIn = () => {
 									<label className="label">
 										<Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
 									</label>
+									<label className="label">
+										<Link to="/login" className="label-text-alt link link-hover">Have an Accout?</Link>
+									</label>
 								</div>
 								<div className="form-control mt-6">
-									<button className="btn btn-primary">Login</button>
+									<button className="btn btn-primary">Register</button>
 								</div>
 							</form>
 						</div>
