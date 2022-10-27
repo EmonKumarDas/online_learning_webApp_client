@@ -20,7 +20,7 @@ const Cart = ({CourseList}) => {
     
     <div className="card-actions justify-end mt-10 w-full">
       <Link to={`/detail/${CourseList.id}`}><button className="btn btn-primary lg:w-[11vw] md:w-[15vw]">Course Details</button></Link>
-      <button className="btn btn-primary lg:w-[11vw] md:w-[15vw]">Download PDF</button>
+      
     </div>
   </div>
 </div>

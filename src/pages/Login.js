@@ -26,7 +26,7 @@ const Login = () => {
   }
 
   return (
-    <div className="lg:mx-0 md:mx-[180px] w-[100vw] h-[500px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+    <div className="lg:mx-0 md:mx-[180px] lg:w-[100vw] w-[90vw] h-[600px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
       <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
       <div className="flex items-center w-full my-4">
         <hr className="w-full dark:text-gray-400" />

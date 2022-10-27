@@ -65,7 +65,7 @@ const SignIn = () => {
 
 
 	return (
-		<div className="lg:mx-0 md:mx-[180px] w-[100vw] h-[800px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+		<div className="lg:mx-0 lg:w-[100vw] w-[90vw] md:mx-[180px] mt-[100px] max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
 			<h2 className="mb-3 text-3xl font-semibold text-center">Sign to your account</h2>
 			<div className="space-y-4">
 				<button onClick={singInWithGoogle} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-2 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-blue-400">
