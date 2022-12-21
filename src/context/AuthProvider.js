@@ -1,10 +1,9 @@
 import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { createContext, useEffect } from "react";
-import { toast } from "react-toastify";
 import app from "../firebase/Firebase";
-export const userContext = createContext();
 
+export const userContext = createContext();
 
 const AuthProvider = ({children}) => {
     const GoogleProvider = new GoogleAuthProvider();

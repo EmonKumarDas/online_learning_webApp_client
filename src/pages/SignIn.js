@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { userContext } from '../context/AuthProvider';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 const SignIn = () => {
-	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn ,updateUserProfile} = useContext(userContext);
+	const { GoogleSignIn, GithubSignIn, EmailPaswordSignIn, updateUserProfile } = useContext(userContext);
 	const navigate = useNavigate();
-	const [error, setError] = useState()
+	const [loading, setLoading] = useState(false);
 	const location = useLocation();
 	const from = location.state?.from?.pathname || '/';
 	const singInWithGoogle = () => {
@@ -17,7 +18,7 @@ const SignIn = () => {
 	}
 
 	const handleGithubSignIn = () => {
-		
+
 		GithubSignIn().then((result) => {
 			navigate(from, { replace: true });
 			toast("Successfully signed in")
@@ -28,37 +29,35 @@ const SignIn = () => {
 	const HandleForm = (e) => {
 		e.preventDefault()
 		const name = e.target.name.value;
-		const PhotoURL = e.target.PhotoURL.value;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
-
+		setLoading(true);
 		EmailPaswordSignIn(email, password).then((userCredential) => {
-			
+
 			toast("Successfully signed in")
 			e.target.email.value = "";
-			e.target.password.value= "";
-			e.target.name.value= "";
-			e.target.PhotoURL.value= "";
-			HandleUserProfile(name,PhotoURL);
+			e.target.password.value = "";
+			e.target.name.value = "";
+			HandleUserProfile(name);
 			navigate(from, { replace: true });
-
+			setLoading(false);
 		}).catch((error) => {
 			const errorMessage = error.message;
 			toast(errorMessage)
-			setError(errorMessage);
+			setLoading(false)
+
 		});
 
-		const HandleUserProfile=(name,PhotoURL)=>{
+		const HandleUserProfile = (name) => {
 			const profile = {
-				displayName : name,
-				photoURL : PhotoURL
+				displayName: name,
 			}
 			console.log(profile)
-			updateUserProfile(profile).then(()=>{
+			updateUserProfile(profile).then(() => {
 
 			}).catch((error) => {
-			console.log(error)
-			  });
+				console.log(error)
+			});
 		}
 	}
 
@@ -96,34 +95,27 @@ const SignIn = () => {
 									<label className="label">
 										<span className="label-text">Name</span>
 									</label>
-									<input name="name" type="text" placeholder="name" className="input input-bordered" required/>
+									<input name="name" type="text" placeholder="name" className="input input-bordered" required />
 								</div>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">PhotoURL</span>
-									</label>
-									<input name="PhotoURL" type="text" placeholder="PhotoURL" className="input input-bordered" required/>
-								</div>
+
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">Email</span>
 									</label>
-									<input name="email" type="text" placeholder="email" className="input input-bordered" required/>
+									<input name="email" type="text" placeholder="email" className="input input-bordered" required />
 								</div>
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">Password</span>
 									</label>
-									<input type="text" name="password" placeholder="password" className="input input-bordered" required/>
-									<label className="label">
-										<Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
-									</label>
+									<input type="text" name="password" placeholder="password" className="input input-bordered" required />
+									
 									<label className="label">
 										<Link to="/login" className="label-text-alt link link-hover">Have an Accout?</Link>
 									</label>
 								</div>
 								<div className="form-control mt-6">
-									<button className="btn btn-primary">Register</button>
+									<button className="btn btn-primary">{loading ? "Loading..." : "Register"}</button>
 								</div>
 							</form>
 						</div>

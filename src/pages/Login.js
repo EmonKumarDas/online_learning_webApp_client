@@ -8,20 +8,24 @@ const Login = () => {
   const { EmailPaswordLogIn } = useContext(userContext);
   const navigate = useNavigate();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
+
   const HandleForm = (e) => {
     e.preventDefault()
     const email = e.target.email.value;
     const password = e.target.password.value;
+    setLoading(true);
     EmailPaswordLogIn(email, password).then((userCredential) => {
       toast("Successfully LoginIn")
       navigate(from, { replace: true });
-
+      setLoading(false);
     }).catch((error) => {
       const errorMessage = error.message;
       toast(errorMessage)
       setError(errorMessage);
+      setLoading(false)
     });
   }
 
@@ -50,15 +54,13 @@ const Login = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input type="text" name="password" placeholder="password" className="input input-bordered" />
-                  <label className="label">
-                    <Link to="/" className="label-text-alt link link-hover">Forgot password?</Link>
-                  </label>
+                
                   <label className="label">
                     <Link to="/registration" className="label-text-alt link link-hover">Don't Have an account?</Link>
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  <button className="btn btn-primary">{loading?"Loading...":"Login"}</button>
                 </div>
               </form>
             </div>
